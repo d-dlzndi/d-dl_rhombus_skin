@@ -1,0 +1,816 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="ko">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]" />
+    <meta name="author" content="[##_blogger_##]">
+    <meta name="description" content="[##_title_##]">
+    <meta name="keywords" content="[##_meta_http_equiv_keywords_##]">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
+
+    <title>[##_page_title_##] - [##_title_##]</title>
+    <script type="text/javascript">
+        var pageTitle = '[##_page_title_##]';
+        var blogTitle = '[##_title_##]';
+        if (pageTitle == blogTitle) {
+            document.title = blogTitle;
+        } else if (pageTitle.substr(0, blogTitle.length) == blogTitle) {
+            document.title = pageTitle;
+        }
+
+        var agent = navigator.userAgent.toLowerCase();
+        if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
+            prompt("본 페이지는 인터넷 익스플로러를 지원하지 않습니다. 웹 브라우저를 변경하신 뒤 다시 접근해주세요. 링크는 아래와 같습니다.", window.location.href);
+            history.go(-1);
+        }
+
+    </script>
+    <style>
+        :root {
+            --base: [##_var_base-color_##];
+            --color: [##_var_color-color_##];
+            --point: [##_var_point-color_##];
+
+            --background-color: [##_var_bg-color_##];
+            --background-img-url: [##_var_bg-img_##];
+
+            --content_width: [##_var_con-width_##];
+        }
+
+        /*
+            --base: #fff8c1;
+            --color: #ffc85c;
+            --point: #c05555;
+        
+            --base: #e9e2d0;
+            --color: #6e5773;
+            --point: #ea9085;
+        
+            --base: #f5f5f5;
+            --color: #27b1be;
+            --point: #facc2e;
+        
+            --base: #f7e6b5;
+            --color: #19215e;
+            --point: #80185f;
+        
+            --base: #ffe9d6;
+            --color: #654062;
+            --point: #65d6ce;
+        
+            --base: #eee;
+            --color: #333;
+            --point: rgb(209, 119, 62);
+        */
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./images/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head>
+
+<body>
+    <s_t3>
+        <div id="all">
+            <div id="main-sidebar" class="main-sidebar">
+                <!--active-->
+
+                <div class="main-sidebar-bg-white" onclick="SideToggle();"></div>
+
+                <div class="main-sidebar-bg" onclick="SideToggle();">
+                    <s_if_var_use-sidebg>
+                        <div id="main-sidebar-bg-img" class="main-sidebar-bg-img background-cover" <s_if_var_bg-img>style="background-image: url('[##_var_bg-img_##]');" defaultBg="[##_var_bg-img_##]"</s_if_var_bg-img>>
+                        </div>
+                    </s_if_var_use-sidebg>
+                </div>
+
+                <div class="main-navi">
+                    <ul class="main-navi-ul">
+                        <li class="profile-li">
+                            <div class="rhombus no-border">
+                                <a class="in-rhombus" href="[##_blog_link_##]">
+                                    <div id="profileOrigImg" class="in-rhombus-img background-cover" style="background-image: url('[##_image_##]'); height: -webkit-fill-available !important;" src="[##_image_##]">
+                                    </div>
+                                    <span class="in-rhombus-icon absolute-center">
+                                        <!--<i class="fas fa-user-alt"></i>-->
+                                        <i class="fas fa-home"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </li>
+
+                        <div class="main-navi-tum"></div>
+
+                        <div id="main-menu-orig" style="display: none;">
+                            [##_blog_menu_##]
+                        </div>
+
+                        <ul id="main-menu-new">
+                            <!-- <li>
+                            <a href="#" class="for-rh-title">
+                                <div class="rhombus">
+                                    <div class="in-rhombus">
+                                        <span class="absolute-center">
+                                            <i class="fas fa-microphone"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="rhombus-title">
+                                    <span class="absolute-center">
+                                        공지사항
+                                    </span>
+                                </div>
+                            </a>
+                        </li> -->
+                        </ul>
+                        <script type="text/javascript">
+                            $("#main-menu-orig>ul li").each(function() {
+                                var child = $(this).find("a");
+                                var href = child.attr("href");
+                                var txt = child.html();
+                                /*
+                                 * 메인 메뉴의 아이콘을 결정하는 부분.
+                                 * 기본적으로 fontAwesome Icon 사용.
+                                 */
+                                var iconTxt = '◆';
+                                if ($(this).hasClass("t_menu_guestbook"))
+                                    iconTxt = '<i class="fas fa-book"></i>';
+                                else if ($(this).hasClass("t_menu_tag"))
+                                    iconTxt = '<i class="fas fa-hashtag"></i>';
+                                else if ($(this).hasClass("t_menu_home"))
+                                    iconTxt = '<i class="fas fa-home"></i>';
+                                else if ($(this).hasClass("t_menu_category"))
+                                    iconTxt = '<i class="fas fa-ellipsis-v"></i>';
+                                else if ($(this).hasClass("t_menu_page"))
+                                    iconTxt = '<i class="fas fa-paper-plane"></i>';
+                                else if (href.indexOf("/notice") != -1) // 공지만 링크를 읽음.
+                                    iconTxt = '<i class="fas fa-microphone"></i>';
+
+                                $("#main-menu-new").append('<li><a href="' + href +
+                                    '" class="for-rh-title"><div class="rhombus"><div class="in-rhombus"><span class="absolute-center">' +
+                                    iconTxt + '</span></div></div><div class="rhombus-title"><span class="absolute-center">' +
+                                    txt + '</span></div></a></li>');
+                            });
+
+                        </script>
+
+                        <li class="sidetogglebtn">
+                            <div class="rhombus point" onclick="SideToggle()">
+                                <div class="in-rhombus">
+                                    <span class="absolute-center">
+                                        <i class="fas fa-angle-double-right"></i>
+                                        <!--<i class="fas fa-chevron-right"></i>-->
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <div class="main-navi-tum2"></div>
+                        <div class="scale-5 main-navi-active-hidden">
+                            <li class="turnAni">
+                                <div class="rhombus sub" onclick="ScrollTop()">
+                                    <div class="in-rhombus">
+                                        <span class="absolute-center">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="turnAni">
+                                <div class="rhombus sub" onclick="ScrollBottom()">
+                                    <div class="in-rhombus">
+                                        <span class="absolute-center">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                        </ol>
+                </div>
+                <!--menu end-->
+
+                <div id="main-sidebar-element">
+                    <!-- 왼쪽 사이드바 -->
+                    <div class="main-sidebar-left-content">
+                        <div class="msb-content">
+                            <nav>
+                                <s_sidebar>
+                                    <s_sidebar_element>
+                                        <!-- 카테고리 -->
+                                        <ul class="ms-list categoryBox">
+                                            <li class="title important">
+                                                CATEGORY
+                                            </li>
+                                            [##_category_list_##]
+                                        </ul>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!--최근에 올라온 글 -->
+                                        <ul class="ms-list">
+                                            <div class="title">
+                                                RECENT POSTS
+                                            </div>
+                                            <s_rctps_rep>
+                                                <li>
+                                                    <a href="[##_rctps_rep_link_##]">
+                                                        [##_rctps_rep_title_##]
+                                                        <span class="c_cnt">[##_rctps_rep_rp_cnt_##]</span>
+                                                    </a>
+                                                </li>
+                                            </s_rctps_rep>
+                                        </ul>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!-- 인기글 -->
+                                        <ul class="ms-list">
+                                            <div class="title">
+                                                POPULAR POSTS
+                                            </div>
+                                            <s_rctps_popular_rep>
+                                                <li>
+                                                    <a href="[##_rctps_rep_link_##]">
+                                                        [##_rctps_rep_title_##]
+                                                        <span class="c_cnt">[##_rctps_rep_rp_cnt_##]</span>
+                                                    </a>
+                                                </li>
+                                            </s_rctps_popular_rep>
+                                        </ul>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!-- 최근 댓글 -->
+                                        <ul class="ms-list">
+                                            <div class="title">
+                                                RECENT COMMENTS
+                                            </div>
+                                            <s_rctrp_rep>
+                                                <li>
+                                                    <a href="[##_rctrp_rep_link_##]">[##_rctrp_rep_desc_##]</a>
+                                                    <span class="info_wrap">
+                                                        <span class="c_cnt">-[##_rctrp_rep_name_##]</span>
+                                                    </span>
+                                                </li>
+                                            </s_rctrp_rep>
+                                        </ul>
+                                    </s_sidebar_element>
+                                </s_sidebar>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- 오른쪽 사이드바 -->
+                    <div class="main-sidebar-right-content">
+                        <div class="msb-content">
+                            <nav>
+                                <s_sidebar>
+                                    <s_sidebar_element>
+                                        <!-- 공지사항 -->
+                                        <s_rct_notice>
+                                            <ul class="ms-list">
+                                                <div class="title important">
+                                                    NOTICE
+                                                </div>
+                                                <s_rct_notice_rep>
+                                                    <li>
+                                                        <a href="[##_notice_rep_link_##]">[##_notice_rep_title_##]</a>
+                                                    </li>
+                                                </s_rct_notice_rep>
+                                            </ul>
+                                        </s_rct_notice>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!-- 태그 클라우드 -->
+                                        <ul class="ms-list">
+                                            <div class="title">
+                                                RANDOM TAG
+                                            </div>
+                                            <li class="tagbox" style="font-size: .8em">
+                                                <s_random_tags>
+                                                    <a href="[##_tag_link_##]" class="[##_tag_class_##]"> [##_tag_name_##]</a>
+                                                </s_random_tags>
+                                            </li>
+                                        </ul>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!-- 카운터 -->
+                                        <ul class="ms-list">
+                                            <div class="title">
+                                                COUNTER
+                                            </div>
+                                            <li style="font-size: 1.5em">
+                                                [##_count_total_##]
+                                            </li>
+                                            <li>
+                                                TODAY ─ [##_count_today_##]
+                                            </li>
+                                            <li>
+                                                YESTERDAY ─ [##_count_yesterday_##]
+                                            </li>
+                                        </ul>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!-- 검색 -->
+                                        <ul class="ms-list">
+                                            <div class="searchbox">
+                                                <s_search>
+                                                    <input type="text" name="[##_search_name_##]" value="[##_search_text_##]" placeholder="SEARCH" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }" class="text" />
+                                                    <button onclick="[##_search_onclick_submit_##]" class="submit">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </s_search>
+                                        </ul>
+                                    </s_sidebar_element>
+                                    <s_sidebar_element>
+                                        <!-- 툴바 -->
+                                        <ul class="ms-list clear meta">
+                                            <li>
+                                                <a href="[##_blog_link_##]manage" d-dl-tooltip="환경설정">
+                                                    <i class="fas fa-wrench"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="[##_blog_link_##]manage/post" d-dl-tooltip="글쓰기">
+                                                    <i class="fas fa-feather-alt"></i>
+                                                </a>
+                                            </li>
+                                            <s_if_var_github-id>
+                                                <li id="github-icon">
+                                                    <a href="https://github.com/[##_var_github-id_##]" target="_blank">
+                                                        <i class="fab fa-github-square"></i>
+                                                    </a>
+                                                </li>
+                                            </s_if_var_github-id>
+                                            <s_if_var_facebook-id>
+                                                <li id="facebook-icon">
+                                                    <a href="https://www.facebook.com/[##_var_facebook-id_##]" target="_blank">
+                                                        <i class="fab fa-facebook-square"></i>
+                                                    </a>
+                                                </li>
+                                            </s_if_var_facebook-id>
+                                            <s_if_var_twitter-id>
+                                                <li id="twitter-icon">
+                                                    <a href="https://twitter.com/[##_var_twitter-id_##]" target="_blank">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </a>
+                                                </li>
+                                            </s_if_var_twitter-id>
+                                            <s_if_var_instagram-id>
+                                                <li id="instagram-icon">
+                                                    <a href="https://www.instagram.com/[##_var_instagram-id_##]" target="_blank">
+                                                        <i class="fab fa-instagram"></i>
+                                                    </a>
+                                                </li>
+                                            </s_if_var_instagram-id>
+                                        </ul>
+                                    </s_sidebar_element>
+                                </s_sidebar>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-content" class="main-content">
+                <!-- 본문 -->
+                <s_list>
+                    <!-- [##revenue_list_upper##] -->
+                    <div id="main-list" class="no-drag">
+                        <h1 class="main-content-title title [##_list_style_##]">
+                            <!--스크립트로 아이콘이 들어감-->
+                            <span id="main-content-list-type"></span>
+                            <span id="main-content-list-title">[##_list_conform_##]</span>
+                            <script type="text/javascript">
+                                var it = document.getElementById("main-content-list-title");
+                                if (it.innerHTML == "전체 글")
+                                    it.innerHTML = document.title;
+
+                            </script>
+                            <span class="defaultFont size-5">([##_list_count_##])</span>
+                            <s_list_image>
+                                <img style="display:none;" changeBg="[##_list_image_##]" />
+                                <script type="text/javascript">
+                                    ChangeBGDefault("[##_list_image_##]");
+
+                                </script>
+                            </s_list_image>
+                        </h1>
+                        <p class="list-description">
+                            [##_list_description_##]
+                        </p>
+                        <s_list_empty>
+                            <p style="text-align: center; opacity: .6">
+                                리스트에 글이 없습니다.
+                            </p>
+                        </s_list_empty>
+                        <ul class="list-type [##_list_style_##]">
+                            <s_list_rep>
+                                <li class="list" key="list-style">
+                                    <div class="list-content">
+                                        <a class="list-thumb" href="[##_list_rep_link_##]">
+                                            <div class="list-thumbnail absolute-center background-cover" style="background-image: url('//i1.daumcdn.net/thumb/C200x200/?fname=[##_list_rep_thumbnail_url_##]')" src="[##_list_rep_thumbnail_url_##]"></div>
+                                        </a>
+                                        <div class="list-text">
+                                            <div class="list-text-box">
+                                                <a class="list-category" href="[##_list_rep_category_link_##]">
+                                                    [##_list_rep_category_##]
+                                                </a>
+                                                <a class="list-title title" href="[##_list_rep_link_##]">
+                                                    [##_list_rep_title_##]
+                                                    <span class="list-lock" description="[##_list_rep_summary_##]"></span>
+                                                </a>
+                                                <span class="list-date">
+                                                    [##_list_rep_regdate_##]
+                                                </span>
+                                                <span class="list-commentCount">
+                                                    <i class="fas fa-comment"></i>
+                                                    <span class="ct">[##_list_rep_rp_cnt_##]</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="rhombus" key="thumbnail">
+                                    <a class="in-rhombus" href="[##_list_rep_link_##]">
+                                        <div class="in-rhombus-img background-cover" style="background-image: url('//i1.daumcdn.net/thumb/C300x300/?fname=[##_list_rep_thumbnail_url_##]')">
+                                        </div>
+                                        <span class="in-rhombus-icon absolute-center">
+                                            <span class="list-lock" description="[##_list_rep_summary_##]"></span>
+                                            [##_list_rep_title_##]
+                                            <span class="list-commentCount">
+                                                <br />·<br />
+                                                <i class="fas fa-comment"></i>
+                                                <span class="ct">[##_list_rep_rp_cnt_##]</span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </s_list_rep>
+                        </ul>
+                        <script type="text/javascript">
+                            var targets = $(".list-type > *");
+                            var style = '[##_list_style_##]';
+                            for (var i = 0; i < targets.length; i++)
+                                if (targets.eq(i).attr("key") != style)
+                                    targets.eq(i).remove();
+
+                        </script>
+                    </div>
+                    <!-- [##revenue_list_lower##] -->
+                </s_list>
+
+                <s_article_rep>
+                    <article class="main-all-article">
+                        <div class="main-article">
+                            <div class="main-article-header">
+                                <div class="content-decorate" <s_article_rep_thumbnail>changeBg="//i1.daumcdn.net/thumb/R0x720/?fname=[##_article_rep_thumbnail_raw_url_##]"</s_article_rep_thumbnail> changeBg="null">
+                                    ━━━━ ◇ ━━━━
+                                </div>
+                                <div class="main-content-header-category">
+                                    <a href="[##_article_rep_category_link_##]">[##_article_rep_category_##]</a>
+                                </div>
+                                <h1 class="main-content-title title">
+                                    <a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a>
+                                </h1>
+                                <time class="main-content-title-time">
+                                    [##_article_rep_date_##]
+                                </time>
+                                <s_ad_div>
+                                    <div class="main-content-header-category">
+                                        <a href="[##_s_ad_m_link_##]">수정</a> ·
+                                        <a href="#" onclick="[##_s_ad_m_onclick_##]">수정(창으로)</a> ·
+                                        ([##_s_ad_s1_label_##])→<a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s2_label_##]</a> ·
+                                        <a href="#" onclick="[##_s_ad_d_onclick_##]">삭제</a>
+                                    </div>
+                                </s_ad_div>
+                            </div>
+
+                            <div class="main-article-content">
+                                [##_article_rep_desc_##]
+                            </div>
+                        </div>
+
+                        <s_tag_label>
+                            <div class="main-content-article-tags">
+                                <div class="title">
+                                    <i class="fas fa-hashtag"></i> TAG
+                                </div>
+                                <div class="tagbox">
+                                    [##_tag_label_rep_##]
+                                </div>
+                            </div>
+                        </s_tag_label>
+
+                        <div class="main-content-article-comments">
+                            <div class="title" onclick="[##_article_rep_rp_link_##]">
+                                <i class="fas fa-comment"></i> COMMENT
+                                <s_rp_count>
+                                    <span class="defaultFont size-5"> ( [##_article_rep_rp_cnt_##] )</span>
+                                </s_rp_count>
+                            </div>
+
+                            <s_rp>
+                                <div class="article-commentbox">
+                                    <ul class="commentbox">
+                                        <s_rp_rep>
+                                            <li id="[##_rp_rep_id_##]" class="[##_rp_rep_class_##]">
+                                                <div class="item-comment">
+                                                    <span class="thumbnail" style="background-image:url('[##_rp_rep_logo_##]')"></span>
+                                                    <div class="comment-content">
+                                                        <div class="meta">
+                                                            <span class="title">
+                                                                <a class="title" href="[##_rp_rep_link_##]"> [##_rp_rep_name_##]</a>
+                                                            </span>
+                                                            <span class="date">[##_rp_rep_date_##]</span>
+                                                        </div>
+                                                        <div class="text">
+                                                            <p>[##_rp_rep_desc_##]</p>
+                                                        </div>
+                                                    </div>
+                                                    <span class="action">
+                                                        <a href="#" onclick="[##_rp_rep_onclick_delete_##]">EDIT/DEL</a> ·
+                                                        <a href="#" onclick="[##_rp_rep_onclick_reply_##]">RE</a>
+                                                    </span>
+                                                </div>
+                                                <s_rp2_container>
+                                                    <ul class="commentbox-reply">
+                                                        <!--reply-->
+                                                        <s_rp2_rep>
+                                                            <li id="[##_rp_rep_id_##]" class="[##_rp_rep_class_##]">
+                                                                <div class="item-comment">
+                                                                    <span class="thumbnail" style="background-image:url('[##_rp_rep_logo_##]')"></span>
+                                                                    <div class="comment-content">
+                                                                        <div class="meta">
+                                                                            <span class="title"> [##_rp_rep_name_##]
+                                                                            </span>
+                                                                            <span class="date">[##_rp_rep_date_##]</span>
+                                                                        </div>
+                                                                        <div class="text">
+                                                                            <p>[##_rp_rep_desc_##]</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="action">
+                                                                        <a href="#" onclick="[##_rp_rep_onclick_delete_##]">EDIT/DEL</a>
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </s_rp2_rep>
+                                                    </ul>
+                                                    <!--reply end-->
+                                                </s_rp2_container>
+                                            </li>
+                                        </s_rp_rep>
+                                    </ul>
+                                    <!--commentbox end-->
+
+                                    <s_rp_input_form>
+                                        <div class="comment-write">
+                                            <div class="write-box">
+                                                <s_rp_member>
+                                                    <s_rp_guest>
+                                                        <div class="write-account">
+                                                            <span>
+                                                                <input type="text" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="NAME">
+                                                            </span>
+                                                            <span class="psw-wrt">
+                                                                <input type="password" name="[##_rp_input_password_##]" value="[##_rp_admin_check_##]" maxlength="12" placeholder="PASSWORD">
+                                                            </span>
+                                                            <span class="hpg-wrt">
+                                                                <input type="text" name="[##_rp_input_homepage_##]" value="[##_guest_homepage_##]" placeholder="HOMEPAGE">
+                                                            </span>
+                                                            <label class="secret-label">
+                                                                <input type="checkbox" name="[##_rp_input_is_secret_##]" id="secret">
+                                                                <span class="secret-label-text"></span>
+                                                            </label>
+                                                        </div>
+                                                    </s_rp_guest>
+                                                </s_rp_member>
+                                                <div class="write-textarea">
+                                                    <textarea name="[##_rp_input_comment_##]" placeholder="COMMENT"></textarea>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn_ok" onclick="[##_rp_onclick_submit_##]">WRITE</button>
+                                        </div>
+                                    </s_rp_input_form>
+                                </div>
+                            </s_rp>
+                        </div>
+                    </article>
+                </s_article_rep>
+
+                <s_notice_rep>
+                    <div class="main-article notice">
+                        <div class="main-article-header">
+                            <div class="content-decorate" <s_notice_rep_thumbnail>changeBg="//i1.daumcdn.net/thumb/R0x720/?fname=[##_notice_rep_thumbnail_raw_url_##]"</s_notice_rep_thumbnail> changeBg="null">
+                                ━━━━ <i class="fas fa-microphone"></i> ━━━━
+                            </div>
+                            <h1 class="main-content-title title">
+                                <a href="[##_notice_rep_link_##]">[##_notice_rep_title_##]</a>
+                            </h1>
+                            <time class="main-content-title-time">
+                                [##_notice_rep_date_##]
+                            </time>
+                        </div>
+                        <div class="main-article-content">
+                            [##_notice_rep_desc_##]
+                        </div>
+                    </div>
+                </s_notice_rep>
+
+                <s_page_rep>
+                    <div class="main-article page">
+                        <div class="main-article-header">
+                            <div class="content-decorate" changeBg="null">
+                                ━━━━ <i class="fas fa-paper-plane"></i> ━━━━
+                            </div>
+                            <h1 class="main-content-title title">
+                                <a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a>
+                            </h1>
+                            <time class="main-content-title-time">
+                                [##_article_rep_date_##]
+                            </time>
+                        </div>
+                        <div class="main-article-content">
+                            [##_article_rep_desc_##]
+                        </div>
+                    </div>
+                </s_page_rep>
+
+                <s_article_protected>
+                    <div class="main-article protected">
+                        <div class="main-article-header">
+                            <div class="content-decorate" changeBg="null">
+                                ━━━━ <i class="fas fa-lock"></i> ━━━━
+                            </div>
+                            <h1 class="main-content-title title">
+                                <a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a>
+                            </h1>
+                            <time class="main-content-title-time">
+                                [##_article_rep_date_##]
+                            </time>
+                        </div>
+                        <div class="main-article-content" style="margin: 3em 0;">
+                            <p style="text-align: center">
+                                <span class="write-lock">
+                                    <input type="password" maxlength="16" id="[##_article_password_##]" name="[##_article_password_##]" placeholder="PASSWORD" value="" onkeydown="if (event.keyCode == 13)[##_article_dissolve_##]" />
+                                </span>
+                                <input type="button" class="btn_ok submit" value="ENTER" onclick="[##_article_dissolve_##]" style="padding: .23em .8em .08em; vertical-align: 0.7em;" />
+                            </p>
+                        </div>
+                    </div>
+                </s_article_protected>
+
+                <s_guest>
+                    <div class="main-guestbook">
+                        <h1 class="main-content-title title">
+                            <i class="fas fa-book"></i>&nbsp;GUESTBOOK
+                        </h1>
+                        <div class="guest-box">
+                            <s_guest_input_form>
+                                <div class="comment-write">
+                                    <div class="write-box">
+                                        <s_guest_member>
+                                            <s_guest_form>
+                                                <div class="write-account">
+                                                    <span>
+                                                        <input type="text" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="NAME">
+                                                    </span>
+                                                    <span class="psw-wrt">
+                                                        <input type="password" name="[##_guest_input_password_##]" value="[##_guest_password_##]" maxlength="12" placeholder="PASSWORD">
+                                                    </span>
+                                                    <span class="hpg-wrt">
+                                                        <input type="text" name="[##_guest_input_homepage_##]" value="[##_guest_homepage_##]" placeholder="HOMEPAGE">
+                                                    </span>
+                                                    <!--
+                                    <label class="secret-label">
+                                        <input type="checkbox" name="" id="secret">
+                                        <span class="secret-label-text"></span>
+                                    </label>
+                                    -->
+                                                </div>
+                                            </s_guest_form>
+                                        </s_guest_member>
+                                        <div class="write-textarea">
+                                            <textarea name="[##_guest_textarea_body_##]" id="comment" placeholder="COMMENT"></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn_ok" onclick="[##_guest_onclick_submit_##]">WRITE</button>
+                                </div>
+                            </s_guest_input_form>
+
+
+                            <s_guest_container>
+                                <ul class="commentbox">
+                                    <s_guest_rep>
+                                        <li id="[##_guest_rep_id_##]" class="[##_guest_rep_class_##]">
+                                            <div class="item-comment">
+                                                <span class="thumbnail" style="background-image:url('[##_guest_rep_logo_##]')"></span>
+                                                <div class="comment-content">
+                                                    <div class="meta">
+                                                        <span class="title">[##_guest_rep_name_##]</span>
+                                                        <span class="date">[##_guest_rep_date_##]</span>
+                                                    </div>
+                                                    <div class="text">
+                                                        <p>
+                                                            [##_guest_rep_desc_##]
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <span class="action">
+                                                    <a href="#" onclick="[##_guest_rep_onclick_delete_##]">EDIT/DEL</a> ·
+                                                    <a href="#" onclick="[##_guest_rep_onclick_reply_##]">RE</a>
+                                                </span>
+                                            </div>
+                                            <s_guest_reply_container>
+                                                <ul class="commentbox-reply">
+                                                    <!--reply-->
+                                                    <s_guest_reply_rep>
+                                                        <li id="[##_guest_rep_id_##]" class="[##_guest_rep_class_##]">
+                                                            <div class="item-comment">
+                                                                <span class="thumbnail" style="background-image:url('[##_guest_rep_logo_##]')"></span>
+                                                                <div class="comment-content">
+                                                                    <div class="meta">
+                                                                        <span class="title">[##_guest_rep_name_##]</span>
+                                                                        <span class="date">[##_guest_rep_date_##]</span>
+                                                                    </div>
+                                                                    <div class="text">
+                                                                        <p>[##_guest_rep_desc_##]</p>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="action">
+                                                                    <a href="#" onclick="[##_guest_rep_onclick_delete_##]">EDIT/DEL</a>
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </s_guest_reply_rep>
+                                                </ul>
+                                                <!--reply end-->
+                                            </s_guest_reply_container>
+                                        </li>
+                                    </s_guest_rep>
+                                </ul>
+                                <!--commentbox end-->
+                            </s_guest_container>
+                        </div>
+                    </div>
+                </s_guest>
+
+                <s_tag>
+                    <div class="main-taglist">
+                        <h1 class="main-content-title title">
+                            <i class="fas fa-hashtag"></i>&nbsp;TAG
+                        </h1>
+                        <div class="tagbox">
+                            <s_tag_rep>
+                                <a href="[##_tag_link_##]" class="[##_tag_class_##]">[##_tag_name_##]</a>
+                            </s_tag_rep>
+                        </div>
+                    </div>
+                </s_tag>
+
+                <s_paging>
+                    <div class="main-paging">
+                        <div class="paging-box">
+                            <a [##_prev_page_##] class="link_page [##_no_more_prev_##]"></a>
+                            <div class="paging_num">
+                                <s_paging_rep>
+                                    <a [##_paging_rep_link_##] class="link_num">[##_paging_rep_link_num_##]</a>
+                                </s_paging_rep>
+                            </div>
+                            <a [##_next_page_##] class="link_page [##_no_more_next_##]"></a>
+                        </div>
+                    </div>
+                </s_paging>
+
+                <footer class="main-content-footer">
+                    <copyright>
+                        <!--수정 금지-->
+                        DESIGN BY <a href="https://d-dl.tistory.com/" target="_blank">ㅓㅇ</a>
+                    </copyright>
+                </footer>
+            </div>
+            <!--main-content end-->
+
+            <s_if_var_use-index>
+                <div id="content-index" class="content-index no-drag">
+                    <ul id="index">
+                        <!--
+                        <li class="index-content">
+                            <span class="index-act btn" onclick="">
+                                <span class="text">
+                                    제목
+                                </span>
+                            </span>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </s_if_var_use-index>
+
+        </div>
+        <!--all end-->
+
+    </s_t3>
+</body>
+
+</html>
