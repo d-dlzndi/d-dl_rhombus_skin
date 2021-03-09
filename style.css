@@ -1112,12 +1112,27 @@ label {
     z-index: -1;
 }
 
-.main-article-content pre[data-ke-type] {
-    color: var(--base);
-    background: var(--color);
+/* 코드 블록의 폰트를 수정하고 싶을 경우 주석 처리를 삭제하세요.
+@font-face {
+    font-family: 'D2Coding';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+
+.main-article-content pre[data-ke-type] code {
     padding: 1em .9em;
     overflow: auto;
     border-radius: 6px;
+    margin: .5em 0;
+    letter-spacing: 0;
+    font-family: 'D2Coding', inherit;
+}
+
+.main-article-content pre[data-ke-type] code:not(.hljs) {
+    color: var(--base);
+    background: var(--color);
 }
 
 .main-article-content ol,
