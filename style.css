@@ -174,7 +174,7 @@ ol {
 #main-sidebar,
 .rhombus > .in-rhombus,
 .main-article-header,
-.main-article-content div[data-ke-type="moreLess"] a,
+.main-article-content div[data-ke-type="moreLess"] a.btn-toggle-moreless,
 .tagbox,
 .paging-box,
 .secret-label-text {
@@ -196,7 +196,7 @@ ol {
 
 .pointer,
 .main-navi-ul li > .rhombus,
-.main-article-content div[data-ke-type="moreLess"] a,
+.main-article-content div[data-ke-type="moreLess"] a.btn-toggle-moreless,
 .btn,
 button,
 label {
@@ -1074,7 +1074,7 @@ label {
 }
 
 
-.main-article-content div[data-ke-type="moreLess"] a {
+.main-article-content div[data-ke-type="moreLess"] a.btn-toggle-moreless {
     z-index: 1;
     display: block;
     padding: .5em .8em;
@@ -1083,12 +1083,12 @@ label {
     color: var(--base);
 }
 
-.main-article-content div[data-ke-type="moreLess"].open a {
+.main-article-content div[data-ke-type="moreLess"].open a.btn-toggle-moreless {
     background-color: var(--point);
     border-radius: 6px 6px 0 0;
 }
 
-.main-article-content div[data-ke-type="moreLess"] a:hover {
+.main-article-content div[data-ke-type="moreLess"] a.btn-toggle-moreless:hover {
     opacity: .85;
 }
 
@@ -1122,12 +1122,14 @@ label {
 */
 
 .main-article-content pre[data-ke-type] code {
+    color: var(--base);
+    background: var(--color);
     padding: 1em .9em;
     overflow: auto;
     border-radius: 6px;
     margin: .5em 0;
     letter-spacing: 0;
-    font-family: 'D2Coding', inherit;
+    font-family: 'D2Coding', 'Consolas', inherit;
 }
 
 .main-article-content pre[data-ke-type] code:not(.hljs) {
