@@ -1003,12 +1003,12 @@ label {
 }
 
 /* 본문 서식 */
-.main-article-content p a {
+.main-article-content * a {
     word-break: break-all;
     color: var(--point);
 }
 
-.main-article-content p a:hover {
+.main-article-content * a:hover {
     font-style: italic;
     font-weight: bold;
 }
