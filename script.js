@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 }); // document ready end
 
- $(window).on('load', function () {
+ window.addEventListener('load', function () {
     var utl = $("#main-sidebar-bg-img").attr("defaultBg");
 
     var scrollListActive = false;
