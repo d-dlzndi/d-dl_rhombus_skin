@@ -107,25 +107,15 @@
                             [##_blog_menu_##]
                         </div>
 
-                        <ul id="main-menu-new">
-                            <!-- <li>
-                            <a href="#" class="for-rh-title">
-                                <div class="rhombus">
-                                    <div class="in-rhombus">
-                                        <span class="absolute-center">
-                                            <i class="fas fa-microphone"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="rhombus-title">
-                                    <span class="absolute-center">
-                                        공지사항
-                                    </span>
-                                </div>
-                            </a>
-                        </li> -->
-                        </ul>
+                        <ul id="main-menu-new"></ul>
                         <script type="text/javascript">
+							function ConvertSystemSourcetoHtml(str){
+							 str = str.replaceAll("&lt;","<");
+							 str = str.replaceAll("&gt;",">");
+							 str = str.replaceAll("&quot;", "\"");
+							 str = str.replaceAll("&#39;","'");
+							 return str;
+							}
                             $("#main-menu-orig>ul li").each(function() {
                                 var child = $(this).find("a");
                                 var href = child.attr("href");
@@ -136,22 +126,32 @@
                                  */
                                 var iconTxt = '◆';
                                 if ($(this).hasClass("t_menu_guestbook"))
-                                    iconTxt = '<i class="fas fa-book"></i>';
+                                    iconTxt = `[##_var_icon-guest_##]`;
                                 else if ($(this).hasClass("t_menu_tag"))
-                                    iconTxt = '<i class="fas fa-hashtag"></i>';
+                                    iconTxt = `[##_var_icon-tag_##]`;
                                 else if ($(this).hasClass("t_menu_home"))
-                                    iconTxt = '<i class="fas fa-home"></i>';
+                                    iconTxt = `[##_var_icon-home_##]`;
                                 else if ($(this).hasClass("t_menu_category"))
-                                    iconTxt = '<i class="fas fa-ellipsis-v"></i>';
+                                    iconTxt = `[##_var_icon-category_##]`;
                                 else if ($(this).hasClass("t_menu_page"))
-                                    iconTxt = '<i class="fas fa-paper-plane"></i>';
+                                    iconTxt = `[##_var_icon-page_##]`;
                                 else if (href.indexOf("/notice") != -1) // 공지만 링크를 읽음.
-                                    iconTxt = '<i class="fas fa-microphone"></i>';
-
-                                $("#main-menu-new").append('<li><a href="' + href +
-                                    '" class="for-rh-title"><div class="rhombus"><div class="in-rhombus"><span class="absolute-center">' +
-                                    iconTxt + '</span></div></div><div class="rhombus-title"><span class="absolute-center">' +
-                                    txt + '</span></div></a></li>');
+                                    iconTxt = `[##_var_icon-notice_##]`;
+								var realIcon = ConvertSystemSourcetoHtml(iconTxt);
+								
+                                $("#main-menu-new").append(`<li>
+										<a href="${href}" class="for-rh-title">
+											<div class="rhombus">
+												<div class="in-rhombus">
+													<span class="absolute-center">${realIcon}</span>
+												</div>
+											</div>
+											<div class="rhombus-title">
+												<span class="absolute-center">${txt}</span>
+											</div>
+										</a>
+									</li>
+								`);
                             });
 
                         </script>
@@ -373,7 +373,7 @@
             <div id="main-content" class="main-content">
                 <!-- 본문 -->
                 <s_list>
-                    <!-- [##revenue_list_upper##] -->
+                    [##_revenue_list_upper_##]
                     <div id="main-list" class="no-drag">
                         <h1 class="main-content-title title [##_list_style_##]">
                             <!--스크립트로 아이콘이 들어감-->
@@ -446,16 +446,15 @@
                                 </li>
                             </s_list_rep>
                         </ul>
-                        <script type="text/javascript">
-                            var targets = $(".list-type > *");
-                            var style = '[##_list_style_##]';
-                            for (var i = 0; i < targets.length; i++)
-                                if (targets.eq(i).attr("key") != style)
-                                    targets.eq(i).remove();
-
-                        </script>
+						<script>
+							var targets = $(".list-type > *");
+							var style = `[##_list_style_##]`;
+							for (var i = 0; i < targets.length; i++)
+								if (targets.eq(i).attr("key") != style)
+									targets.eq(i).remove();
+						</script>
                     </div>
-                    <!-- [##revenue_list_lower##] -->
+                    [##_revenue_list_lower_##]
                 </s_list>
 
                 <s_article_rep>
@@ -563,6 +562,12 @@
                                     <!--commentbox end-->
 
                                     <s_rp_input_form>
+										<div style="display: flex;">
+											<label class="secret-label">
+												<input type="checkbox" name="[##_rp_input_is_secret_##]" id="secret">
+												<span class="secret-label-text"></span>
+											</label>
+										</div>
                                         <div class="comment-write">
                                             <div class="write-box">
                                                 <s_rp_member>
@@ -577,10 +582,6 @@
                                                             <span class="hpg-wrt">
                                                                 <input type="text" name="[##_rp_input_homepage_##]" value="[##_guest_homepage_##]" placeholder="HOMEPAGE">
                                                             </span>
-                                                            <label class="secret-label">
-                                                                <input type="checkbox" name="[##_rp_input_is_secret_##]" id="secret">
-                                                                <span class="secret-label-text"></span>
-                                                            </label>
                                                         </div>
                                                     </s_rp_guest>
                                                 </s_rp_member>
@@ -666,6 +667,12 @@
                         </h1>
                         <div class="guest-box">
                             <s_guest_input_form>
+										<div style="display: flex;">
+											<label class="secret-label">
+												<input type="checkbox" name="[##_guest_input_is_secret_##]" id="secret">
+												<span class="secret-label-text"></span>
+											</label>
+										</div>
                                 <div class="comment-write">
                                     <div class="write-box">
                                         <s_guest_member>
@@ -680,12 +687,6 @@
                                                     <span class="hpg-wrt">
                                                         <input type="text" name="[##_guest_input_homepage_##]" value="[##_guest_homepage_##]" placeholder="HOMEPAGE">
                                                     </span>
-                                                    <!--
-                                    <label class="secret-label">
-                                        <input type="checkbox" name="" id="secret">
-                                        <span class="secret-label-text"></span>
-                                    </label>
-                                    -->
                                                 </div>
                                             </s_guest_form>
                                         </s_guest_member>
@@ -801,7 +802,6 @@
 
         </div>
         <!--all end-->
-
     </s_t3>
 </body>
 

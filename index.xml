@@ -121,6 +121,62 @@
                 </description>
             </variable>
         </variablegroup>
+        <variablegroup name="사이드바 아이콘">
+            <variable>
+                <name>icon-guest</name>
+                <label>
+                    <![CDATA[ 방명록 아이콘 ]]>
+                </label>
+                <type>STRING</type>
+                <option />
+                <default>&lt;i class=&quot;fas fa-book&quot;&gt;&lt;/i&gt;</default>
+            </variable>
+            <variable>
+                <name>icon-tag</name>
+                <label>
+                    <![CDATA[ 태그 클라우드 아이콘 ]]>
+                </label>
+                <type>STRING</type>
+                <option />
+                <default>&lt;i class=&quot;fas fa-hashtag&quot;&gt;&lt;/i&gt;</default>
+            </variable>
+            <variable>
+                <name>icon-home</name>
+                <label>
+                    <![CDATA[ 홈 아이콘 ]]>
+                </label>
+                <type>STRING</type>
+                <option />
+                <default>&lt;i class=&quot;fas fa-home&quot;&gt;&lt;/i&gt;</default>
+            </variable>
+            <variable>
+                <name>icon-category</name>
+                <label>
+                    <![CDATA[ 카테고리 아이콘 ]]>
+                </label>
+                <type>STRING</type>
+                <option />
+                <default>&lt;i class=&quot;fas fa-ellipsis-v&quot;&gt;&lt;/i&gt;</default>
+            </variable>
+            <variable>
+                <name>icon-page</name>
+                <label>
+                    <![CDATA[ 페이지 아이콘 ]]>
+                </label>
+                <type>STRING</type>
+                <option />
+                <default>&lt;i class=&quot;fas fa-paper-plane&quot;&gt;&lt;/i&gt;</default>
+            </variable>
+            <variable>
+                <name>icon-notice</name>
+                <label>
+                    <![CDATA[ 공지 아이콘 ]]>
+                </label>
+                <type>STRING</type>
+                <option />
+                <default>&lt;i class=&quot;fas fa-microphone&quot;&gt;&lt;/i&gt;</default>
+            </variable>
+        </variablegroup>
         <variablegroup name="색상 설정">
             <variable>
                 <name>base-color</name>
