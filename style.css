@@ -1470,6 +1470,12 @@ label {
     position: static;
 }
 
+.secret-label:not(:only-child)::after {
+    content: " 비밀글";
+    font-size: .9em;
+    opacity: .5;
+}
+
 .hpg-wrt {
     margin-left: 3px;
 }
@@ -1969,12 +1975,6 @@ a.list-thumb:hover .list-thumbnail {
         order: -1;
         text-align: right;
         margin-top: -1em;
-    }
-
-    .secret-label::after {
-        content: " 비밀글";
-        font-size: .9em;
-        opacity: .5;
     }
 
     .btn_ok {
