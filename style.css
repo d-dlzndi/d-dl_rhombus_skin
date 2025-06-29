@@ -9,7 +9,7 @@
     --content_top: 200px;
     --content_top-mobile: 70px;
     /*본문(글부분만)의 넓이*/
-    --content_width: 700px;
+    /*--content_width: 700px;*/
     /*사이드바를 펼쳤을 시 사이 간격(배수로 사용)*/
     --main_side_center_padding: 4;
     /*본문 썸네일 크기*/
